@@ -21,6 +21,7 @@ printf "${magenta}%s${normal}\n" "${my_banner}"
 get_time_left () {
     local output
 	output=$(bjobs -o "time_left:5" -noheader "$LSB_JOBID")
+	# 12 hours gets displayed with only one zero, so we fix that here
 	if [ "$output" = "12:0 " ]; then
 		output="12:00"
 	fi
