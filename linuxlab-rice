@@ -19,7 +19,8 @@ printf "${magenta}%s${normal}\n" "${my_banner}"
 # Add a time left indicator to the prompt
 # ---------------------------------------
 get_time_left () {
-	local output=$(bjobs -o "time_left:5" -noheader $LSB_JOBID)
+    local output
+	output=$(bjobs -o "time_left:5" -noheader "$LSB_JOBID")
 	if [ "$output" = "12:0 " ]; then
 		output="12:00"
 	fi
