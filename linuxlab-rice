@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# --------------------
+# Print a cool banner!
+# --------------------
+IFS='' read -r -d '' my_banner <<'EOF'
+ _ _                  _       _
+| (_)_ __  _   ___  _| | __ _| |__
+| | | '_ \| | | \ \/ / |/ _` | '_ \
+| | | | | | |_| |>  <| | (_| | |_) |
+|_|_|_| |_|\__,_/_/\_\_|\__,_|_.__/
+EOF
+
+magenta=$(tput setaf 5)
+normal=$(tput sgr0)
+printf "${magenta}%s${normal}\n" "${my_banner}"
+
+# ---------------------------------------
+# Add a time left indicator to the prompt
+# ---------------------------------------
+get_time_left () {
+	local output=$(bjobs -o "time_left:5" -noheader $LSB_JOBID)
+	if [ "$output" = "12:0 " ]; then
+		output="12:00"
+	fi
+	printf "%s\n" "$output"
+}
+PS1="${magenta}[\$(get_time_left)]${normal}$PS1"
+
