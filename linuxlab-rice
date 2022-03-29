@@ -26,5 +26,5 @@ get_time_left () {
 	fi
 	printf "%s\n" "$output"
 }
-PS1="${magenta}[\$(get_time_left)]${normal}$PS1"
+PS1="\[${magenta}\][$(get_time_left)]\[${normal}\]$PS1"
 
